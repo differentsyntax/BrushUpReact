@@ -35,7 +35,9 @@ class Library extends Component {
   state = { 
     open: false,
     freeBookmark: true,
-    hiring: true
+    hiring: true,
+    data: [],
+    loading: false
    }
   
   toggle = () => {
@@ -47,7 +49,11 @@ class Library extends Component {
   // Common Component Life Cycle Functions, in-built
 
   componentDidMount(){
-    console.log("The component mounted successfully")
+    this.setState({loading:true})
+    fetch('https://hplussport.com/api/products/order/price/sort/asc/qty/1')
+          .then(data => data.json())
+          .then(data => this.setState({data, loading: false}))
+    
   }
 
   componentDidUpdate(){
@@ -62,6 +68,21 @@ class Library extends Component {
     return (
       <div>
         {this.state.hiring ? <Hiring /> : <NotHiring />}
+        {this.state.loading ?
+          "loading..." :
+          <div>
+            {this.state.data.map( 
+              product => {
+                return (
+                  <div>
+                    <h3>Library Product of the Week!</h3>
+                    <h4>{product.name}</h4>
+                    <img src = {product.image} height = {100} />
+                  </div> 
+                )
+              })}
+          </div>
+        }
         <h1 style = {style} >The library is {this.state.open ? "open" : "closed" }</h1>
     <button onClick = {this.toggle}>{this.state.open ? "Shut Down" : "Open Library"}</button>
         {books.map(
