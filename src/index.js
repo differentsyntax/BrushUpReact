@@ -9,6 +9,14 @@ let skiData = {
 };
 
 class SkiDayCounter extends Component {
+  getPercent = (decimal) => {
+    return decimal * 100 + "%";
+  };
+
+  calcGoalProgress = (total, goal) => {
+    return this.getPercent(total / goal);
+  };
+
   render() {
     const { total, powder, backcountry, goal } = this.props;
     // above line can be used to avoid writing this.props for each of them
@@ -27,7 +35,7 @@ class SkiDayCounter extends Component {
         </div>
 
         <div>
-          <p> Goal Days: {goal}</p>
+          <p> Goal Progress: {this.calcGoalProgress(total, goal)}</p>
         </div>
       </section>
     );
