@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { render } from "react-dom"
+import PropTypes from "prop-types"
 
 const bookList = [
   // in the event one value (pages here) is not given, default props come handy
@@ -106,6 +107,16 @@ class Library extends Component {
   }
 }
 
+Library.propTypes = {
+  books: PropTypes.array
+}
+
+Book.propTypes = {
+  title: PropTypes.string,
+  author: PropTypes.string,
+  pages: PropTypes.number,
+  freeBookmark: PropTypes.bool
+}
 render(
   // in the event component is not referenced (books = {bookList} here) is not given, default props in Library component come handy
   // < Library />,
