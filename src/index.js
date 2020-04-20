@@ -1,5 +1,11 @@
-import React, { Component } from "react";
-import { render } from "react-dom";
+import React, { Component } from "react"
+import { render } from "react-dom"
+
+const bookList = [
+  {"title":"The Ugly Truth", "author":"Minisha Augustine", "pages": 250},
+  {"title":"The Ugly Truth 2", "author":"Minisha Augustine", "pages": 250},
+  {"title":"The Ugly Truth 3", "author":"Minisha Augustine", "pages": 250}
+]
 
 const Book = ({ title, author, pages }) => {
   return (
@@ -8,19 +14,24 @@ const Book = ({ title, author, pages }) => {
       <p> By: {author}</p>
       <p> Pages: {pages}</p>
     </div>
-  );
-};
+  )
+}
 
-const Library = () => {
+const Library = ({books}) => {
   return (
     <div>
-      <Book title="The Ugly Truth" author="Minisha Augustine" pages={250}></Book>
-      <Book title="The Ugly Truth 2" author="Minisha Augustine" pages={250}></Book>
-      <Book title="The Ugly Truth 3" author="Minisha Augustine" pages={250}></Book>
+      {books.map(
+        (book,i) => <Book key = {i} 
+                          title = {book.title} 
+                          author = {book.author} 
+                          pages = {book.pages}>
+                    </Book>
+      )}
     </div>
-  );
-};
+  )
+}
+
 render(
-  <Library />, 
+  <Library books = {bookList} />, 
   document.getElementById("root")
-  );
+  )
