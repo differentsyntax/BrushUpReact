@@ -18,11 +18,24 @@ const Book = ({ title, author, pages, freeBookmark }) => {
   )
 }
 
+// notice two different ways of component defining syntax below
+
+const Hiring = () => 
+<div>
+  <p> The library is hiring. Go to www.library.com/jobs for more.</p> 
+</div>
+
+const NotHiring = () => 
+<div>
+  <p> The library is not hiring anymore. Check back later at www.library.com/jobs for more.</p> 
+</div>
+
 class Library extends Component {
   
   state = { 
     open: false,
-    freeBookmark: true
+    freeBookmark: true,
+    hiring: true
    }
   
   toggle = () => {
@@ -38,6 +51,7 @@ class Library extends Component {
     const {books} = this.props // const books = this.props.books
     return (
       <div>
+        {this.state.hiring ? <Hiring /> : <NotHiring />}
         <h1 style = {style} >The library is {this.state.open ? "open" : "closed" }</h1>
     <button onClick = {this.toggle}>{this.state.open ? "Shut Down" : "Open Library"}</button>
         {books.map(
