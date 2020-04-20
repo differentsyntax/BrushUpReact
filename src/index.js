@@ -44,6 +44,16 @@ class Library extends Component {
     }))
   }
 
+  // Common Component Life Cycle Functions, in-built
+
+  componentDidMount(){
+    console.log("The component mounted successfully")
+  }
+
+  componentDidUpdate(){
+    console.log("The component just updated")
+  }
+
   render(){
     var style = {
       backgroundColor: 'Orange'
